@@ -1,11 +1,11 @@
 """
 ##### Basic Collection Data Types in Python #####
     
-    *Lists  -> collection which is ordered and mutable. Allows duplicate members.
-    *Tuple  -> collection which is ordered and immutable. Allows duplicate members.
-    *Set    -> collection which is unordered and unindexed. No duplicate members.
-    *Dict   -> collection which is unordered, mutable and indexed. No duplicate members.
-    *String -> immutable sequences of Unicode code points.
+    *Lists   -> collection which is ordered and mutable. Allows duplicate members.
+    *Tuple   -> collection which is ordered and immutable. Allows duplicate members.
+    *Set     -> collection which is unordered and unindexed. No duplicate members.
+    *Dict    -> collection which is unordered, mutable and indexed. No duplicate members.
+    *String  -> immutable sequences of Unicode code points.
 
 """
 
@@ -102,7 +102,6 @@ print(timeit.timeit(stmt="(0, 1, 2, 3, 4, 5)", number=1000000))     # -> 0.01483
 
 ### DICT
 ###
-
 # Creating a dict
 my_dict = {
     'Key1': 'Value1',
@@ -151,7 +150,6 @@ my_dict = {
 
 ### SET
 ###
-
 # Creating a Set
 my_set = {"Value1", "Value2", "Value3"}
 
@@ -196,7 +194,6 @@ my_frozenset = frozenset(my_set)        #Creates an immutable set from an iterab
 
 ### STRINGS
 ###
-
 # Creating a string
 my_string = 'String'
 
