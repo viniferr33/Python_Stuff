@@ -143,3 +143,31 @@ locals()    #Update and return a dictionary representing the current local symbo
 ### Map
 ###
 map(lambda x,y: x/y, [(5,3), (8,7), (6,8)])     #Return an itertator with the results of the given function and the given iterable
+
+### Max
+###
+max([2,4,5,7,8,9,4,6,10,55])  #Return the largest item in an iterable
+
+### Min
+###
+min([2,4,5,7,8,9,4,6,10,55])  #Return the smallest item in an iterable
+
+### Oct
+###
+oct(8)    #Return the octal value of a given number -> 0o10
+
+### Ord
+###
+ord('a')  #Return the Unicode intereger of a given Char -> 97
+
+### Round
+###
+round(0.5, 1)   #Return the rounded number with the given amount of digits -> 0
+
+### Setattr
+###
+setattr(object, 'attribute', 55)  #Set the attribute of a given object with the given value == object.attribute = 55
+
+### Zip
+###
+zip([5,4,8,6,0,8], [8,5,7,6,4,8,1,7])     #Return a list of tuples containing the I element of N given iterables -> (5, 8) (4, 5) (8, 7) ...
