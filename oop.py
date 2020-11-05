@@ -5,9 +5,9 @@
     *Inheritance        -> Allows a class to inherit methods, behavior and attributes from another class
     *Encapsulation      -> Put restrictions on methods and variables to prevent accidents
     *Polymorphism       -> Using diferent class types in the same way to optimize code
-    *Classmethod        -> Classmethod decorator 
-    *Staticmethod       -> Staticmethod decorator
-    *Meta Programming   -> 
+    *Special Functions  -> Methods used when centain syntax is used
+    *Classmethod        -> Classmethod decorator bounds a method to a class rather than its object, very often used when you have to call a method but you dont have the object yet
+    *Staticmethod       -> Staticmethod decorator bounds a method to a class rather than object, but static doenst know about the other class attributes, often used to group a util function to a class
 """
 
 ### Classes and Objects
@@ -62,7 +62,7 @@ class Vehicle:      #That will be the parent class
     def status(self):
         return f"The {self.model} has traveled {self.kilometers} and still have {self.fuel} of fuel"
 
-class Truck(Vehicle):   #That is the child class with inherited methods and attributes from Vehicle
+class Truck(Vehicle):   #That is the child class with inherited methods and attributes from Vehicle, it could receive more than 1 Parent and inherit its methods too
     
     def __init__(self, model, kilometers, fuel):
         #Super function allows to run the parent __init__ function inside Truck __init__ class
@@ -125,5 +125,92 @@ fesh = Fish()
 can_climb(monke)    # -> Monkey can climb the tree!!
 can_climb(fesh)     # -> Fish cant climb the tree!!
 
+### Special Functions
+###
+class Point:
+    """Creates a cartesian point"""
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __str__(self):
+        return f"({self.x}, {self.y})"      #Everytime the object is called as a String this method will be called
+
+    def __add__(self, other):               #Every time the object is sum to another this method will be called
+        x = self.x + other.x                
+        y = self.y + other.y
+        return Point(x, y)                  #This method sums 2 points
+
+"""
+#### Special Functions list ####
+
+    #Operator                       #Expression            #Internally
+    - Addition                  ->   p1 + p2        =       p1.__add__(p2)
+    - Subtraction               ->   p1 - p2        =       p1.__sub__(p2)
+    - Multiplication            ->   p1 * p2        =       p1.__mul__(p2)
+    - Power                     ->   p1 ** p2       =       p1.__pow__(p2)
+    - Division                  ->   p1 / p2        =       p1.__truediv__(p2)
+    - Floor Division            ->   p1 // p2       =       p1.__floordiv__(p2)
+    - Modulo                    ->   p1 % p2        =       p1.__mod__(p2)
+    - Bitwise Left Shift        ->   p1 << p2       =       p1.__lshift__(p2)
+    - Bitwise Right Shift       ->   p1 >> p2       =       p1.__rshift__(p2)
+    - Bitwise AND               ->   p1 & p2        =       p1.__and__(p2)
+    - Bitwise OR                ->   p1 | p2        =       p1.__or__(p2)
+    - Bitwise XOR               ->   p1 ^ p2        =       p1.__xor__(p2)
+    - Bitwise NOT               ->   ~p1            =       p1.__invert__()
+    - Less Than                 ->   p1 < p2        =       p1.__lt__(p2)
+    - Less Than or Equal To     ->   p1 <= p2       =       p1.__le__(p2)
+    - Equal To                  ->   p1 == p2       =       p1.__eq__(p2)
+    - Not Equal To              ->   p1 != p2       =       p1.__ne__(p2)
+    - Greater Than              ->   p1 > p2        =       p1.__gt__(p2)
+    - Grater Than or Equal To   ->   p1 >= p2       =       p1.__ge__(p2)
+"""
+
+pt = Point(4, 8)
+print(pt)           # -> (4, 8)
+pt2 = Point(9, -2)
+print(pt+pt2)       # -> (13, 6)
+
 ### Classmethod
 ###
+from datetime import date
+
+class Person:
+    def __init__(self, name, age):                          #To create a person you need to know the name and the age
+        self.name = name
+        self.age = age
+                                                            #Class methods are often used as factory methods
+    @classmethod                                            #This decorator makes the fromBirthYear a class method
+    def fromBirthYear(cls, name, birthYear):                #This method can be called using the class rather than an Object
+        return cls(name, date.today().year - birthYear)     #This method will return a Person object calculating its age
+
+    def display(self):
+        print(self.name + "'s age is: " + str(self.age))
+
+Person.fromBirthYear('John', 2002).display()                # -> John's age is 18
+
+### Staticmethod
+###
+class Dates:
+    def __init__(self, date):
+        self.date = date
+        
+    def getDate(self):
+        return self.date
+
+    @staticmethod                           #This decorator makes the toDashDate a static method
+    def toDashDate(date):                   #This method doesnt interact with the class attributes, it behaves like a commom function, but its grouped in "Dates"
+        return date.replace("/", "-")
+
+date = Dates("15-12-2016")
+dateFromDB = "15/12/2016"
+dateWithDash = Dates.toDashDate(dateFromDB)     # Replace every '/' by a '-'
+
+date.getDate() == dateWithDash      # -> True
+
+"""
+### Diference between Static and Class methods ###
+    - Static method knows nothing about the class and just deals with the parameters
+    - Class method works with the class since its parameter is always the class itself.
+    - Class method works well with inheritance, Static doesnt
+"""
