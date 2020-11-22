@@ -1,7 +1,6 @@
 """
 ##### Built-In Functions #####
 
-    *
 """
 
 ### Abs
