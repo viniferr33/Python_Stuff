@@ -8,4 +8,4 @@ Some things I wrote down while studying Python
     * Itertools
     * OOP
     * Logging
-    
+    * Decorators
