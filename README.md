@@ -9,3 +9,4 @@ Some things I wrote down while studying Python
     * OOP
     * Logging
     * Decorators
+    * Generators
