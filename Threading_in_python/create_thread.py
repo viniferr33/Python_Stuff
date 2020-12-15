@@ -1,6 +1,7 @@
 """
 ###### Threading ######
 
+    - Creating Threads
 """
 
 #Create and run
@@ -32,4 +33,4 @@ if __name__ == "__main__":
     #Wait for all threads to finish
     #Block the main thread until these threads are finished
     for thread in threads:
-        thread.join()        
+        thread.join()
