@@ -46,18 +46,6 @@ def firstn(n):
     return nums
 
 sum_of_first_n = sum(firstn(1000000))
-<<<<<<< HEAD
-print(sum_of_first_n)
-import sys
-print(sys.getsizeof(firstn(1000000)), "bytes")
-
-# Expression
-###
-mygen = (i for i in range(1000) if i % 2 == 0)          # This will return a generator
-
-mygen = [i for i in range(1000) if i % 2 == 0]          # This will return a list
-
-=======
 print(sum_of_first_n)                           # 499999500000
 print(sys.getsizeof(firstn(1000000)), "bytes")  # 8697464 bytes
 
@@ -71,4 +59,3 @@ def genfirstn(n):
 sum_of_first_n = sum(genfirstn(1000000))
 print(sum_of_first_n)                               # 499999500000
 print(sys.getsizeof(genfirstn(1000000)), "bytes")   # 120 bytes
->>>>>>> 795402ee92e337d2d971912130384440a530efad
