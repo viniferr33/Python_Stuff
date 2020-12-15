@@ -1,28 +1,43 @@
 """
-###### Generators #####
+##### Generators #####
 
+    *Generators are functions that can be paused and resumed return an object that can be iterated over. 
+    *Unlike lists, they are lazy and produce itens one at time and only when asked
+
+    + Memory Efficient
 """
 
-# Syntax
-###
+# Creating a generator
+def my_gen():
+    yield 1
+    yield 2
+    yield 3     #yield statement works like a return, but when the next method is called the program runs the code between the last yield and the next
 
-def my_generator():
-    yield 1                 # The 'yield' statement works like a return but it will pause the function soon as called
-    yield 2                 # Calling the next method a generator leads to next yield
-    print('Hey')
-    yield 3
+def countdown(num):
+    print('Starting')
+    while num > 0:
+        yield num
+        num -= 1
 
-g = my_generator()          # Generator functions returns a generator object to control the actions, Generators are iterables
-next(g)                     # This will yield the first value   -> 1
-next(g)                     # This will yield the second value  -> 2
-next(g)                     # This will yield the third value   -> 'Hey' 3
-next(g)                     # This will raise an error -> StopIteration
+# Using a generator
+generator_obj = countdown(3)
 
-# Memory
-###
-"""
-Generators save memory, The value are generated only when needed and dont need to wait all the dataset to be processed
-"""
+print(next(generator_obj))      # -> Starting // 3
+print(next(generator_obj))      # -> 2
+print(next(generator_obj))      # -> 1
+print(next(generator_obj))      # -> Raise an exception "StopIteration"
+
+# Iterating
+generator_obj = countdown(3)
+sum_gen = sum(generator_obj)
+
+for i in generator_obj:
+    print(i)
+
+## Memory Efficient objects
+import sys
+
+# Using list
 def firstn(n):
     num, nums = 0, []
     while num < n:
@@ -31,6 +46,7 @@ def firstn(n):
     return nums
 
 sum_of_first_n = sum(firstn(1000000))
+<<<<<<< HEAD
 print(sum_of_first_n)
 import sys
 print(sys.getsizeof(firstn(1000000)), "bytes")
@@ -41,3 +57,18 @@ mygen = (i for i in range(1000) if i % 2 == 0)          # This will return a gen
 
 mygen = [i for i in range(1000) if i % 2 == 0]          # This will return a list
 
+=======
+print(sum_of_first_n)                           # 499999500000
+print(sys.getsizeof(firstn(1000000)), "bytes")  # 8697464 bytes
+
+# Using generator
+def genfirstn(n):
+    num = 0
+    while num < n:
+        yield num
+        num += 1
+
+sum_of_first_n = sum(genfirstn(1000000))
+print(sum_of_first_n)                               # 499999500000
+print(sys.getsizeof(genfirstn(1000000)), "bytes")   # 120 bytes
+>>>>>>> 795402ee92e337d2d971912130384440a530efad
